@@ -1,0 +1,265 @@
+/* REXX ------------------------------------------------------------ */
+/* THIERRY DELERIS - I-BP 2015 ------------------------------------- */
+/* ----------------------------------------------------------------- */
+/* EXTRACTION DES DONNEES ISSUES DES SMF99 (PROC VALIDE) ----------- */
+/* ----------------------------------------------------------------- */
+NUMERIC DIGITS 16
+
+COUNT1 = 0
+OUT2. = ''
+COUNT2 = 0
+
+QUEUE 'SMF99DTE;'!!,
+      'SMF99TME;'!!,
+      'SMF99SID;'!!,
+      'SMF996_ECLASS_NAME;'!!,
+      'SMF996_PER_NUM;'!!,
+      'SMF996_GOALTYPE;'!!,
+      'SMF996_GOALTYPE_LIB;'!!,
+      'SMF996_PERCENTILE;'!!,
+      'SMF996_ICLASS_NAME;'!!,
+      'SMF996_GOALVAL;'!!,
+      'SMF996_IMPOR;'!!,
+      'SMF996_DP;'!!,
+      'SMF996_IODP;'!!,
+      'SMF996_MPLI;'!!,
+      'SMF996_MPLO;'!!,
+      'SMF996_RUA;'!!,
+      'SMF996_PSPT;'!!,
+      'SMF996_PSITAR;'!!,
+      'SMF996_LOCAL_PI;'!!,
+      'SMF996_SYSPLEX_PI;'!!,
+      'SMF996_PSERV;'!!,
+      'SMF996_PISERV;'!!,
+      'SMF996_PSSERV;'
+
+CALL WRITE_OUT2 'SMF99DTE;'!!,
+      'SMF99TME;'!!,
+      'SMF99SID;'!!,
+      'SMF996_ECLASS_NAME;'!!,
+      'SMF996_PER_NUM;'!!,
+      'SMF996_SERVER_CLASS_NAME;'!!,
+      'SMF996_SERVER_PER_NUM;'
+
+"EXECIO 100 DISKR SMF (STEM SMF.)"
+
+DO WHILE SMF.0 > 0
+  DO I = 1 TO SMF.0
+    SMF99RTY = C2D(SUBSTR(SMF.I,2,1))
+    SMF99STP = C2D(SUBSTR(SMF.I,19,2))
+
+    IF (SMF99RTY = 99) & (SMF99STP = 6) THEN
+    DO
+      SMF99DTE = SMFDATE(SUBSTR(SMF.I,7,4))
+      SMF99TME = SMFTIME(C2D(SUBSTR(SMF.I,3,4)))
+
+      SMF99SID = SUBSTR(SMF.I,11,4)
+
+      SMF99POF = C2D(SUBSTR(SMF.I,25,4))
+      SMF99PLN = C2D(SUBSTR(SMF.I,29,2))
+      SMF99PON = C2D(SUBSTR(SMF.I,31,2))
+
+      SMF99DOF = C2D(SUBSTR(SMF.I,33,4))
+      SMF99DLN = C2D(SUBSTR(SMF.I,37,2))
+      SMF99DON = C2D(SUBSTR(SMF.I,39,2))
+
+/* SMF TYPE 99 RECORD SUBTYPE 6 -- SELF-DEFINING SECTION ----------- */
+/* OFFSET FROM BEGINNING OF RECORD: SMF99DOF ----------------------- */
+      TEMPDOF = SMF99DOF-3
+      DO D = 1 TO SMF99DON
+        SMF99COF = C2D(SUBSTR(SMF.I,TEMPDOF,4))
+        SMF99CLN = C2D(SUBSTR(SMF.I,TEMPDOF+4,2))
+        SMF99CON = C2D(SUBSTR(SMF.I,TEMPDOF+6,2))
+
+        TEMPCOF = SMF99COF-3
+        DO C = 1 TO SMF99CON
+          SMF996_ECLASS_NAME = STRIP(SUBSTR(SMF.I,TEMPCOF,8),B)
+          SMF996_PER_NUM  = X2D(C2X(SUBSTR(SMF.I,TEMPCOF+8,2)))
+          SMF996_GOALTYPE = X2D(C2X(SUBSTR(SMF.I,TEMPCOF+10,1)))
+          SMF996_GOALVAL = X2D(C2X(SUBSTR(SMF.I,TEMPCOF+20,4)))
+          SELECT
+            WHEN SMF996_GOALTYPE = 0
+              THEN DO
+                SMF996_GOALTYPE_LIB = 'SYS'
+                SMF996_GOALVAL = 'N/A'
+              END
+            WHEN SMF996_GOALTYPE = 1
+              THEN DO
+                SMF996_GOALTYPE_LIB = 'SRT'
+                SMF996_GOALVAL = SMF996_GOALVAL / 1000
+              END
+            WHEN SMF996_GOALTYPE = 2
+              THEN DO
+                SMF996_GOALTYPE_LIB = 'LRT'
+                SMF996_GOALVAL = SMF996_GOALVAL / 1000
+              END
+            WHEN SMF996_GOALTYPE = 3
+              THEN SMF996_GOALTYPE_LIB = 'VEL'
+            WHEN SMF996_GOALTYPE = 4
+              THEN SMF996_GOALTYPE_LIB = 'DIS'
+            OTHERWISE SMF996_GOALTYPE_LIB = '???'
+          END
+          SMF996_GOALVAL = TRANSLATE(SMF996_GOALVAL,',','.')
+
+          SMF996_PERCENTILE = X2D(C2X(SUBSTR(SMF.I,TEMPCOF+11,1)))
+          SMF996_ICLASS_NAME = STRIP(SUBSTR(SMF.I,TEMPCOF+12,8),B)
+          SMF996_IMPOR = X2D(C2X(SUBSTR(SMF.I,TEMPCOF+24,2)))
+          SMF996_DP = X2D(C2X(SUBSTR(SMF.I,TEMPCOF+26,1)))
+          SMF996_IODP = X2D(C2X(SUBSTR(SMF.I,TEMPCOF+27,1)))
+          SMF996_MPLI = X2D(C2X(SUBSTR(SMF.I,TEMPCOF+28,2)))
+          SMF996_MPLO = X2D(C2X(SUBSTR(SMF.I,TEMPCOF+30,2)))
+          SMF996_RUA  = X2D(C2X(SUBSTR(SMF.I,TEMPCOF+32,4)))
+          SMF996_PSPT = X2D(C2X(SUBSTR(SMF.I,TEMPCOF+36,4)))
+          SMF996_PSITAR = X2D(C2X(SUBSTR(SMF.I,TEMPCOF+40,4)))
+          SMF996_LOCAL_PI = X2D(C2X(SUBSTR(SMF.I,TEMPCOF+44,4)))/100
+          SMF996_LOCAL_PI = TRANSLATE(SMF996_LOCAL_PI,',','.')
+          SMF996_SYSPLEX_PI = X2D(C2X(SUBSTR(SMF.I,TEMPCOF+48,4)))/100
+          SMF996_SYSPLEX_PI = TRANSLATE(SMF996_SYSPLEX_PI,',','.')
+          SMF99SOF = C2D(SUBSTR(SMF.I,TEMPCOF+52,4))
+          SMF99SLN = C2D(SUBSTR(SMF.I,TEMPCOF+56,2))
+          SMF99SON = C2D(SUBSTR(SMF.I,TEMPCOF+58,2))
+
+          TEMPSOF = SMF99SOF-3
+          DO S = 1 TO SMF99SON
+            SMF996_SERVER_CLASS_NAME = STRIP(SUBSTR(SMF.I,TEMPSOF,8),B)
+            SMF996_SERVER_PER_NUM = X2D(C2X(SUBSTR(SMF.I,TEMPSOF+8,4)))
+
+            CALL WRITE_OUT2 SMF99DTE !!';'!!,
+                  SMF99TME !!';'!!,
+                  SMF99SID !!';'!!,
+                  SMF996_ECLASS_NAME !!';'!!,
+                  SMF996_PER_NUM !!';'!!,
+                  SMF996_SERVER_CLASS_NAME !!';'!!,
+                  SMF996_SERVER_PER_NUM !!';'
+
+            TEMPSOF = TEMPSOF + SMF99SLN
+          END
+
+          SMF996_PSERV = X2D(C2X(SUBSTR(SMF.I,TEMPCOF+60,4)))
+          SMF996_PISERV = X2D(C2X(SUBSTR(SMF.I,TEMPCOF+64,4)))
+          SMF996_PSSERV = X2D(C2X(SUBSTR(SMF.I,TEMPCOF+68,4)))
+
+          QUEUE SMF99DTE !!';'!!,
+                SMF99TME !!';'!!,
+                SMF99SID !!';'!!,
+                SMF996_ECLASS_NAME !!';'!!,
+                SMF996_PER_NUM !!';'!!,
+                SMF996_GOALTYPE !!';'!!,
+                SMF996_GOALTYPE_LIB !!';'!!,
+                SMF996_PERCENTILE !!';'!!,
+                SMF996_ICLASS_NAME !!';'!!,
+                SMF996_GOALVAL !!';'!!,
+                SMF996_IMPOR !!';'!!,
+                SMF996_DP !!';'!!,
+                SMF996_IODP !!';'!!,
+                SMF996_MPLI !!';'!!,
+                SMF996_MPLO !!';'!!,
+                SMF996_RUA !!';'!!,
+                SMF996_PSPT !!';'!!,
+                SMF996_PSITAR !!';'!!,
+                SMF996_LOCAL_PI !!';'!!,
+                SMF996_SYSPLEX_PI !!';'!!,
+                SMF996_PSERV !!';'!!,
+                SMF996_PISERV !!';'!!,
+                SMF996_PSSERV !!';'
+
+          TEMPCOF = TEMPCOF + SMF99CLN
+        END
+        TEMPDOF = TEMPDOF + SMF99DLN
+      END
+    END
+  END
+
+  COUNT1=COUNT1 + QUEUED();
+  "EXECIO" QUEUED() "DISKW OUT1"
+  "EXECIO 100 DISKR SMF (STEM SMF.)"
+  SAY "COUNT OUT1: "COUNT1". TIME IS: "TIME() ;
+  SAY "COUNT OUT2: "COUNT2". TIME IS: "TIME() ;
+END
+
+"EXECIO 0 DISKR SMF (STEM SMF. FINIS)"
+"EXECIO 0 DISKW OUT1 (FINIS)"
+"EXECIO * DISKW OUT2 (STEM OUT2. FINIS"
+
+EXIT
+
+/* ------------------------------------------------------------ */
+SMFDATE: PROCEDURE
+  ARG DATE0
+  DATE1 = SUBSTR(C2X(DATE0),3,5)
+  RETURN DATE('E',DATE1,'J')
+
+/* ------------------------------------------------------------ */
+SMFTIME:
+  ARG TIME0
+  TIME1 = TIME0 % 100
+  HH = TIME1 % 3600
+  HH = RIGHT("0"!!HH,2)
+  MM = (TIME1 % 60) - (HH * 60)
+  MM = RIGHT("0"!!MM,2)
+  SS = TIME1 - (HH * 3600) - (MM * 60)
+  SS = RIGHT("0"!!SS,2)
+  OTIME = HH!!":"!!MM!!":"!!SS
+RETURN OTIME
+
+/* ------------------------------------------------------------ */
+UNPACK: PROCEDURE
+  PARSE ARG PACKED_STR, NUM_DEC
+  IF NUM_DEC = "" THEN
+    NUM_DEC=0
+                        /* CONVERT PACKED DATA TO HEX AND SPLIT INTO  */
+                        /* NUMBER AND SIGN PORTIONS                   */
+  HEX_STR=C2X( PACKED_STR )
+  DEC_STR=LEFT( HEX_STR, LENGTH( HEX_STR )-1 )
+  PACKED_SIGN=RIGHT( HEX_STR, 1 )
+                        /* CHECK THAT SIGN AND NUMERIC PORTIONS HAVE  */
+                        /* VALID VALUES                               */
+  IF VERIFY( PACKED_SIGN, "ABCDEF" ) > 0 THEN
+    RETURN ""
+  IF VERIFY( DEC_STR, "0123456789" ) > 0 THEN
+    RETURN ""
+                        /* ARE THERE ENOUGH DIGITS FOR THE DECIMAL    */
+                        /* POINT??                                    */
+  IF NUM_DEC > LENGTH( DEC_STR ) THEN
+    RETURN ""
+                        /* IF SIGN PORTION INDICATES A NEGATIVE       */
+                        /* NUMBER THEN OBLIGE                         */
+  IF POS( PACKED_SIGN, "BD" ) > 0 THEN
+    DEC_STR=0-DEC_STR
+                        /* IF THERE IS A DECIMAL POINT THEN ADD IT AT */
+                        /* THE APPROPRIATE PLACE                      */
+  IF NUM_DEC > 0 THEN
+    DEC_STR=INSERT( ".", DEC_STR, LENGTH( DEC_STR )-NUM_DEC )
+RETURN DEC_STR
+
+/* ------------------------------------------------------------ */
+FLOATING:PROCEDURE
+  PARSE ARG FLOAT
+  FLOAT_SIZE = LENGTH(FLOAT)
+  BYTE_0 = SUBSTR(FLOAT, 1, 1)
+  SELECT
+     WHEN BITAND(BYTE_0, '80'X) == '00'X THEN SIGN = '+'
+     WHEN BITAND(BYTE_0, '80'X) == '80'X THEN SIGN = '-'
+  END
+  EXPONENT = C2D(BITAND(BYTE_0, '7F'X)) - 64
+  FRACTION = 0
+  POWER    = -1
+  DO I = 2 TO FLOAT_SIZE
+      IF I = 9 THEN ITERATE
+      NEXT_BYTE   = C2D(SUBSTR(FLOAT, I, 1))
+      LEFT_DIGIT  = NEXT_BYTE % 16
+      FRACTION    = FRACTION + LEFT_DIGIT * 16**POWER
+      RIGHT_DIGIT = NEXT_BYTE // 16
+      POWER       = POWER - 1
+      FRACTION    = FRACTION + RIGHT_DIGIT * 16**POWER
+      POWER       = POWER - 1
+  END
+  INTERPRET 'VALUE =' SIGN ( FRACTION * 16 ** EXPONENT )
+RETURN VALUE
+
+WRITE_OUT2:
+ARG X_LIGNE
+  COUNT2 = COUNT2 + 1
+  OUT2.COUNT2 = X_LIGNE
+  OUT2.0 = COUNT2
+ RETURN
