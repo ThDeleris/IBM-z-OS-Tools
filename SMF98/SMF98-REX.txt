@@ -1,0 +1,1012 @@
+/* REXX ------------------------------------------------------------ */
+/* THIERRY DELERIS ------------------------------------------------- */
+/* ----------------------------------------------------------------- */
+/* SMF TYPE 98 RECORD ---------------------------------------------- */
+/* ----------------------------------------------------------------- */
+NUMERIC DIGITS 16
+
+QUEUE 'SMF98DTE;',
+    !!'SMF98TME;',
+    !!'SMF98SID;',
+    !!'ProcType;',
+    !!'ENV_SvtCoreMode;',
+    !!'ENV_AWMT;',
+    !!'ENV_SVT_MAXQL;',
+    !!'ENV_SVT_MINHL;',
+    !!'ENV_OnlineCores;',
+    !!'ENV_Num_VH_cores;',
+    !!'ENV_Num_VM_cores;',
+    !!'ENV_Num_VL_Unparked_cores;',
+    !!'ENV_Num_VL_Parked_cores;',
+    !!'ENV_Num_Excluded;',
+    !!'ENV_SVT_EngineSpeed;',
+    !!'ENV_SVT_Priority_Ranges_High;',
+    !!'ENV_SVT_Priority_Ranges_Med;',
+    !!'ENV_SVT_Priority_Ranges_Low;',
+    !!'ENV_SVT_Priority_Ranges_Disc;',
+    !!'ENV_VcmCPsPerNode;',
+    !!'ENV_QDepthAnalysisDelta;',
+    !!'ENV_Num_Core_Excluded;',
+    !!'ENV_SVT_SubBucket_Ranges_1;',
+    !!'ENV_SVT_SubBucket_Ranges_2;',
+    !!'ENV_SVT_SubBucket_Ranges_3;',
+    !!'ENV_SVT_SubBucket_Ranges_4;',
+    !!'UT_CPUS_UNPARKED;',
+    !!'UT_AVG_NUM_UNPARKEDVLS;',
+    !!'UT_AVG_CPUBUSY;',
+    !!'UT_AVG_CPUBUSY_VH;',
+    !!'UT_AVG_CPUBUSY_VM;',
+    !!'UT_AVG_CPUBUSY_VL;',
+    !!'UT_AVG_COREBUSY;',
+    !!'UT_AVG_COREBUSY_VH;',
+    !!'UT_AVG_COREBUSY_VM;',
+    !!'UT_AVG_COREBUSY_VL;',
+    !!'UT_AVG_MTTW_TIMETOD_us;',
+    !!'UT_AVG_TASKSPERWAKEUP;',
+    !!'UT_AVG_SRBSPERWAKEUP;',
+    !!'UT_AVG_HELPSPERWAKEUP;',
+    !!'UT_SIG_NUMCPUS;',
+    !!'UT_SIG_AVG_MTTW_TIMETOD_us;',
+    !!'UT_SIG_AVG_TASKSPERWAKEUP;',
+    !!'UT_SIG_AVG_SRBSPERWAKEUP;',
+    !!'UT_SIG_AVG_HELPSPERWAKEUP;',
+    !!'UT_SIG_AVG_CPUBUSY;',
+    !!'UT_SIG_AVG_FDISPSPERWAKEUP;',
+    !!'UT_SIG_TOP_CPU;',
+    !!'UT_SIG_2ND_CPU;',
+    !!'UT_SIG_TOP2_MTTW_TIMETOD_us;',
+    !!'UT_AVG_FDISPSPERWAKEUP;',
+    !!'PB_ContributingWUQs;',
+    !!'PB_SigDelayWUQs;',
+    !!'PB_MaxQDepth_1;',
+    !!'PB_QDepthDelta_1;',
+    !!'PB_AvgQDepthPerSample_1;',
+    !!'PB_AvgQDepthPerSamplePerWuq_1;',
+    !!'PB_MaxDispDelay_us_1;',
+    !!'PB_TotDispDelayDelta_us_1;',
+    !!'PB_WorkUnitDispDelta_1;',
+    !!'PB_AvgDispDelay_us_1;',
+    !!'PB_MajorTimeSliceDelta_1;',
+    !!'PB_MinorTimeSliceDelta_1;',
+    !!'PB_SD_MaxDispDelay_us_1;',
+    !!'PB_SD_TotDispDelayDelta_us_1;',
+    !!'PB_SD_WorkUnitDispDelta_1;',
+    !!'PB_SD_AvgDispDelay_us_1;',
+    !!'PB_SD_MajorTimeSliceDelta_1;',
+    !!'PB_SD_MinorTimeSliceDelta_1;',
+    !!'PB_MaxQDepth_2;',
+    !!'PB_QDepthDelta_2;',
+    !!'PB_AvgQDepthPerSample_2;',
+    !!'PB_AvgQDepthPerSamplePerWuq_2;',
+    !!'PB_MaxDispDelay_us_2;',
+    !!'PB_TotDispDelayDelta_us_2;',
+    !!'PB_WorkUnitDispDelta_2;',
+    !!'PB_AvgDispDelay_us_2;',
+    !!'PB_MajorTimeSliceDelta_2;',
+    !!'PB_MinorTimeSliceDelta_2;',
+    !!'PB_SD_MaxDispDelay_us_2;',
+    !!'PB_SD_TotDispDelayDelta_us_2;',
+    !!'PB_SD_WorkUnitDispDelta_2;',
+    !!'PB_SD_AvgDispDelay_us_2;',
+    !!'PB_SD_MajorTimeSliceDelta_2;',
+    !!'PB_SD_MinorTimeSliceDelta_2;',
+    !!'PB_MaxQDepth_3;',
+    !!'PB_QDepthDelta_3;',
+    !!'PB_AvgQDepthPerSample_3;',
+    !!'PB_AvgQDepthPerSamplePerWuq_3;',
+    !!'PB_MaxDispDelay_us_3;',
+    !!'PB_TotDispDelayDelta_us_3;',
+    !!'PB_WorkUnitDispDelta_3;',
+    !!'PB_AvgDispDelay_us_3;',
+    !!'PB_MajorTimeSliceDelta_3;',
+    !!'PB_MinorTimeSliceDelta_3;',
+    !!'PB_SD_MaxDispDelay_us_3;',
+    !!'PB_SD_TotDispDelayDelta_us_3;',
+    !!'PB_SD_WorkUnitDispDelta_3;',
+    !!'PB_SD_AvgDispDelay_us_3;',
+    !!'PB_SD_MajorTimeSliceDelta_3;',
+    !!'PB_SD_MinorTimeSliceDelta_3;',
+    !!'PB_MaxQDepth_4;',
+    !!'PB_QDepthDelta_4;',
+    !!'PB_AvgQDepthPerSample_4;',
+    !!'PB_AvgQDepthPerSamplePerWuq_4;',
+    !!'PB_MaxDispDelay_us_4;',
+    !!'PB_TotDispDelayDelta_us_4;',
+    !!'PB_WorkUnitDispDelta_4;',
+    !!'PB_AvgDispDelay_us_4;',
+    !!'PB_MajorTimeSliceDelta_4;',
+    !!'PB_MinorTimeSliceDelta_4;',
+    !!'PB_SD_MaxDispDelay_us_4;',
+    !!'PB_SD_TotDispDelayDelta_us_4;',
+    !!'PB_SD_WorkUnitDispDelta_4;',
+    !!'PB_SD_AvgDispDelay_us_4;',
+    !!'PB_SD_MajorTimeSliceDelta_4;',
+    !!'PB_SD_MinorTimeSliceDelta_4;',
+    !!'AVG_CPUBUSY_Count;',
+    !!'AVG_CPUBUSY_VH_Count;',
+    !!'AVG_CPUBUSY_VM_Count;',
+    !!'AVG_CPUBUSY_VL_Count;',
+    !!'AVG_COREBUSY_Count;',
+    !!'AVG_COREBUSY_VH_Count;',
+    !!'AVG_COREBUSY_VM_Count;',
+    !!'AVG_COREBUSY_VL_Count;'
+
+COUNT = 0
+"EXECIO 100 DISKR SMF (STEM SMF.)"
+RecKey = ""
+prevRecKey = ""
+
+DO WHILE SMF.0 > 0
+  DO I = 1 TO SMF.0
+    /* RECORD HEADER */
+    SMF98RTY = C2D(SUBSTR(SMF.I,6,1))
+    SMF98STY = C2D(SUBSTR(SMF.I,23,2))
+
+    IF (SMF98RTY = 98) & (SMF98STY = 1) THEN
+    DO
+      SMF98DTE = SMFDATE(SUBSTR(SMF.I,11,4))
+      SMF98TME = SMFTIME(C2D(SUBSTR(SMF.I,7,4)))
+      SMF98SID = SUBSTR(SMF.I,15,4)
+      RecKey = SMF98DTE!!SMF98TME!!SMF98SID
+
+      SMF98IND            = C2D(SUBSTR(SMF.I,25,1))
+      SMF98PARTSEQNO      = C2D(SUBSTR(SMF.I,26,1))
+      SMF98SDSLEN         = C2D(SUBSTR(SMF.I,27,2))
+      SMF98SDSTRIPLETSNUM = C2D(SUBSTR(SMF.I,29,2))
+
+      /* SELF-DEFINING SECTION */
+      SMF98IOF            = C2D(SUBSTR(SMF.I,48+ 1,4))
+      SMF98ILN            = C2D(SUBSTR(SMF.I,48+ 5,2))
+      SMF98ION            = C2D(SUBSTR(SMF.I,48+ 7,2))
+      SMF98CSOF           = C2D(SUBSTR(SMF.I,48+ 9,4))
+      SMF98CSLN           = C2D(SUBSTR(SMF.I,48+13,2))
+      SMF98CSON           = C2D(SUBSTR(SMF.I,48+15,2))
+      SMF98DOF            = C2D(SUBSTR(SMF.I,48+17,4))
+      SMF98DLN            = C2D(SUBSTR(SMF.I,48+21,2))
+      SMF98DON            = C2D(SUBSTR(SMF.I,48+23,2))
+
+      /* SUBTYPE DATA SECTION */
+      /*  - OFFSET : SMF98DOF */
+      /*  - LENGTH : SMF98DLN */
+      /*  - NUMBER : SMF98DON */
+
+      DO N = 1 TO SMF98DON
+        SMF98_1_DATATRIPLETSNUM = C2D(SUBSTR(SMF.I,SMF98DOF+  1,4))
+        SMF98_1_DATATRIPLETSLEN = C2D(SUBSTR(SMF.I,SMF98DOF+  5,4))
+
+        ENVOF = C2D(SUBSTR(SMF.I,SMF98DOF+  9,4))
+        ENVLN = C2D(SUBSTR(SMF.I,SMF98DOF+ 13,2))
+        ENVON = C2D(SUBSTR(SMF.I,SMF98DOF+ 15,2))
+
+        DO N = 1 TO ENVON
+/*ENV_Flags = C2D(SUBSTR(SMF.I,ENVOF+1,3))*/
+ENV_SvtCoreMode_Max = C2D(SUBSTR(SMF.I,ENVOF+5,2))
+ENV_SvtCoreMode_CP = C2D(SUBSTR(SMF.I,ENVOF+7,2))
+ENV_SvtCoreMode_zIIP = C2D(SUBSTR(SMF.I,ENVOF+11,2))
+ENV_AWMT_CP = C2D(SUBSTR(SMF.I,ENVOF+13,4))
+ENV_AWMT_ZIIP = C2D(SUBSTR(SMF.I,ENVOF+21,4))
+ENV_SVTMAXQL = C2D(SUBSTR(SMF.I,ENVOF+25,2))
+ENV_SVT_zIIPMAXQL = C2D(SUBSTR(SMF.I,ENVOF+29,2))
+ENV_SVTMINHL = C2D(SUBSTR(SMF.I,ENVOF+31,2))
+ENV_SVT_zIIPMINHL = C2D(SUBSTR(SMF.I,ENVOF+35,2))
+ENV_OnlineCores_CPs = C2D(SUBSTR(SMF.I,ENVOF+69,4))
+ENV_OnlineCores_zIIPs = C2D(SUBSTR(SMF.I,ENVOF+77,4))
+ENV_Num_VH_cores_CP = C2D(SUBSTR(SMF.I,ENVOF+81,4))
+ENV_Num_VH_cores_zIIP = C2D(SUBSTR(SMF.I,ENVOF+89,4))
+ENV_Num_VM_cores_CP = C2D(SUBSTR(SMF.I,ENVOF+93,4))
+ENV_Num_VM_cores_zIIP = C2D(SUBSTR(SMF.I,ENVOF+101,4))
+ENV_Num_VL_Unparked_cores_CP = C2D(SUBSTR(SMF.I,ENVOF+105,4))
+ENV_Num_VL_Unparked_cores_zIIP = C2D(SUBSTR(SMF.I,ENVOF+113,4))
+ENV_Num_VL_Parked_cores_CP = C2D(SUBSTR(SMF.I,ENVOF+117,4))
+ENV_Num_VL_Parked_cores_zIIP = C2D(SUBSTR(SMF.I,ENVOF+125,4))
+ENV_Num_Excluded_CP = C2D(SUBSTR(SMF.I,ENVOF+129,4))
+ENV_Num_Excluded_zIIP = C2D(SUBSTR(SMF.I,ENVOF+137,4))
+ENV_SVT_CPEngineSpeed = C2D(SUBSTR(SMF.I,ENVOF+141,4))
+ENV_SVT_SpecialtyEngineSpeed = C2D(SUBSTR(SMF.I,ENVOF+145,4))
+
+ENV_SVT_Priority_Ranges_Area_1 = C2D(SUBSTR(SMF.I,ENVOF+149,1))
+ENV_SVT_Priority_Ranges_Area_2 = C2D(SUBSTR(SMF.I,ENVOF+150,1))
+ENV_SVT_Priority_Ranges_Area_3 = C2D(SUBSTR(SMF.I,ENVOF+151,1))
+ENV_SVT_Priority_Ranges_Area_High = "255-"!!,
+  ENV_SVT_Priority_Ranges_Area_1
+ENV_SVT_Priority_Ranges_Area_Med  = ,
+ (ENV_SVT_Priority_Ranges_Area_1-1)!!"-"!!,
+  ENV_SVT_Priority_Ranges_Area_2
+ENV_SVT_Priority_Ranges_Area_Low  = ,
+ (ENV_SVT_Priority_Ranges_Area_2-1)!!"-"!!,
+  ENV_SVT_Priority_Ranges_Area_3
+ENV_SVT_Priority_Ranges_Area_Disc =,
+ (ENV_SVT_Priority_Ranges_Area_3-1)!!"-192"
+
+ENV_VcmCPsPerNode = C2D(SUBSTR(SMF.I,ENVOF+152,1))
+ENV_QDepthAnalysisDelta = C2D(SUBSTR(SMF.I,ENVOF+153,4))
+ENV_Num_Core_Excluded_CP = C2D(SUBSTR(SMF.I,ENVOF+157,4))
+ENV_Num_Core_Excluded_zIIP = C2D(SUBSTR(SMF.I,ENVOF+165,4))
+
+ENV_SVT_SubBucket_Ranges_Area_1 = C2D(SUBSTR(SMF.I,ENVOF+169,1))*0.5
+ENV_SVT_SubBucket_Ranges_Area_2 = C2D(SUBSTR(SMF.I,ENVOF+170,1))*0.5
+ENV_SVT_SubBucket_Ranges_Area_3 = C2D(SUBSTR(SMF.I,ENVOF+171,1))*0.5
+ENV_SVT_SubBucket_Ranges_1 = ,
+  ENV_SVT_SubBucket_Ranges_Area_1!!"%-100%"
+ENV_SVT_SubBucket_Ranges_2 = ,
+  ENV_SVT_SubBucket_Ranges_Area_2!!"%-"!!,
+  ENV_SVT_SubBucket_Ranges_Area_1!!"%"
+ENV_SVT_SubBucket_Ranges_3 = ,
+  ENV_SVT_SubBucket_Ranges_Area_3!!"%-"!!,
+  ENV_SVT_SubBucket_Ranges_Area_2!!"%"
+ENV_SVT_SubBucket_Ranges_4 = ,
+  "0%-"!!,
+  ENV_SVT_SubBucket_Ranges_Area_3!!"%"
+
+          ENVOF = ENVOF + ENVLN
+        END
+
+        UTOF = C2D(SUBSTR(SMF.I,SMF98DOF+ 65,4))
+        UTLN = C2D(SUBSTR(SMF.I,SMF98DOF+ 69,2))
+        UTON = C2D(SUBSTR(SMF.I,SMF98DOF+ 71,2))
+
+        DO N = 1 TO UTON
+UT_CPUS_UNPARKED_CP = C2D(SUBSTR(SMF.I,UTOF+1,4))
+UT_CPUS_UNPARKED_ZIIP = C2D(SUBSTR(SMF.I,UTOF+9,4))
+UT_AVG_NUM_UNPARKEDVLS_CP = C2D(SUBSTR(SMF.I,UTOF+13,4))
+UT_AVG_NUM_UNPARKEDVLS_ZIIP = C2D(SUBSTR(SMF.I,UTOF+21,4))
+UT_AVG_CPUBUSY_CP = C2D(SUBSTR(SMF.I,UTOF+25,4))
+UT_AVG_CPUBUSY_ZIIP = C2D(SUBSTR(SMF.I,UTOF+33,4))
+UT_AVG_CPUBUSY_VH_CP = C2D(SUBSTR(SMF.I,UTOF+37,4))
+UT_AVG_CPUBUSY_VH_ZIIP = C2D(SUBSTR(SMF.I,UTOF+45,4))
+UT_AVG_CPUBUSY_VM_CP = C2D(SUBSTR(SMF.I,UTOF+49,4))
+UT_AVG_CPUBUSY_VM_ZIIP = C2D(SUBSTR(SMF.I,UTOF+57,4))
+UT_AVG_CPUBUSY_VL_CP = C2D(SUBSTR(SMF.I,UTOF+61,4))
+UT_AVG_CPUBUSY_VL_ZIIP = C2D(SUBSTR(SMF.I,UTOF+69,4))
+UT_AVG_COREBUSY_CP = C2D(SUBSTR(SMF.I,UTOF+73,4))
+UT_AVG_COREBUSY_ZIIP = C2D(SUBSTR(SMF.I,UTOF+81,4))
+UT_AVG_COREBUSY_VH_CP = C2D(SUBSTR(SMF.I,UTOF+85,4))
+UT_AVG_COREBUSY_VH_ZIIP = C2D(SUBSTR(SMF.I,UTOF+93,4))
+UT_AVG_COREBUSY_VM_CP = C2D(SUBSTR(SMF.I,UTOF+97,4))
+UT_AVG_COREBUSY_VM_ZIIP = C2D(SUBSTR(SMF.I,UTOF+105,4))
+UT_AVG_COREBUSY_VL_CP = C2D(SUBSTR(SMF.I,UTOF+109,4))
+UT_AVG_COREBUSY_VL_ZIIP = C2D(SUBSTR(SMF.I,UTOF+117,4))
+UT_AVG_MTTW_CP_TIMETOD = TodUsec(C2D(SUBSTR(SMF.I,UTOF+121,8)))
+UT_AVG_MTTW_ZIIP_TIMETOD = TodUsec(C2D(SUBSTR(SMF.I,UTOF+137,8)))
+UT_AVG_TASKSPERWAKEUP_CP = C2D(SUBSTR(SMF.I,UTOF+145,4))
+UT_AVG_TASKSPERWAKEUP_ZIIP = C2D(SUBSTR(SMF.I,UTOF+153,4))
+UT_AVG_SRBSPERWAKEUP_CP = C2D(SUBSTR(SMF.I,UTOF+157,4))
+UT_AVG_SRBSPERWAKEUP_ZIIP = C2D(SUBSTR(SMF.I,UTOF+165,4))
+UT_AVG_HELPSPERWAKEUP_CP = C2D(SUBSTR(SMF.I,UTOF+169,4))
+UT_AVG_HELPSPERWAKEUP_ZIIP = C2D(SUBSTR(SMF.I,UTOF+177,4))
+UT_SIG_NUMCPUS_CP = C2D(SUBSTR(SMF.I,UTOF+181,4))
+UT_SIG_NUMCPUS_ZIIP = C2D(SUBSTR(SMF.I,UTOF+189,4))
+UT_SIG_AVG_MTTW_CP_TIMETOD   = TodUsec(C2D(SUBSTR(SMF.I,UTOF+193,8)))
+UT_SIG_AVG_MTTW_ZIIP_TIMETOD = TodUsec(C2D(SUBSTR(SMF.I,UTOF+209,8)))
+UT_SIG_AVG_TASKSPERWAKEUP_CP = C2D(SUBSTR(SMF.I,UTOF+217,4))
+UT_SIG_AVG_TASKSPERWAKEUP_ZIIP = C2D(SUBSTR(SMF.I,UTOF+225,4))
+UT_SIG_AVG_SRBSPERWAKEUP_CP = C2D(SUBSTR(SMF.I,UTOF+229,4))
+UT_SIG_AVG_SRBSPERWAKEUP_ZIIP = C2D(SUBSTR(SMF.I,UTOF+237,4))
+UT_SIG_AVG_HELPSPERWAKEUP_CP = C2D(SUBSTR(SMF.I,UTOF+241,4))
+UT_SIG_AVG_HELPSPERWAKEUP_ZIIP = C2D(SUBSTR(SMF.I,UTOF+249,4))
+UT_SIG_AVG_CPUBUSY_CP = C2D(SUBSTR(SMF.I,UTOF+253,4))
+UT_SIG_AVG_CPUBUSY_ZIIP = C2D(SUBSTR(SMF.I,UTOF+261,4))
+UT_SIG_AVG_FDISPSPERWAKEUP_CP = C2D(SUBSTR(SMF.I,UTOF+265,4))
+UT_SIG_AVG_FDISPSPERWAKEUP_ZIIP = C2D(SUBSTR(SMF.I,UTOF+273,4))
+UT_SIG_TOP_CPU_CP = C2D(SUBSTR(SMF.I,UTOF+277,2))
+UT_SIG_TOP_CPU_ZIIP = C2D(SUBSTR(SMF.I,UTOF+281,2))
+UT_SIG_2ND_CPU_CP = C2D(SUBSTR(SMF.I,UTOF+283,2))
+UT_SIG_2ND_CPU_ZIIP = C2D(SUBSTR(SMF.I,UTOF+287,2))
+UT_SIG_TOP2_MTTW_CP_TIMETOD   = TodUsec(C2D(SUBSTR(SMF.I,UTOF+289,8)))
+UT_SIG_TOP2_MTTW_ZIIP_TIMETOD = TodUsec(C2D(SUBSTR(SMF.I,UTOF+305,8)))
+UT_AVG_FDISPSPERWAKEUP_CP = C2D(SUBSTR(SMF.I,UTOF+313,4))
+UT_AVG_FDISPSPERWAKEUP_ZIIP = C2D(SUBSTR(SMF.I,UTOF+321,4))
+          UTOF = UTOF + UTLN
+        END
+
+        PBOF = C2D(SUBSTR(SMF.I,SMF98DOF+113,4))
+        PBLN = C2D(SUBSTR(SMF.I,SMF98DOF+117,2))
+        PBON = C2D(SUBSTR(SMF.I,SMF98DOF+119,2))
+
+  PB_CP_ContributingWUQs = ""
+  PB_CP_SigDelayWUQs = ""
+  PB_CP_MaxQDepth_1 = ""
+  PB_CP_QDepthDelta_1 = ""
+  PB_CP_AvgQDepthPerSample_1 = ""
+  PB_CP_AvgQDepthPerSamplePerWuq_1 = ""
+  PB_CP_MaxDispDelay_1 = ""
+  PB_CP_TotDispDelayDelta_1 = ""
+  PB_CP_WorkUnitDispDelta_1 = ""
+  PB_CP_AvgDispDelay_1 = ""
+  PB_CP_MajorTimeSliceDelta_1 = ""
+  PB_CP_MinorTimeSliceDelta_1 = ""
+  PB_CP_SD_MaxDispDelay_1 = ""
+  PB_CP_SD_TotDispDelayDelta_1 = ""
+  PB_CP_SD_WorkUnitDispDelta_1 = ""
+  PB_CP_SD_AvgDispDelay_1 = ""
+  PB_CP_SD_MajorTimeSliceDelta_1 = ""
+  PB_CP_SD_MinorTimeSliceDelta_1 = ""
+  PB_CP_MaxQDepth_2 = ""
+  PB_CP_QDepthDelta_2 = ""
+  PB_CP_AvgQDepthPerSample_2 = ""
+  PB_CP_AvgQDepthPerSamplePerWuq_2 = ""
+  PB_CP_MaxDispDelay_2 = ""
+  PB_CP_TotDispDelayDelta_2 = ""
+  PB_CP_WorkUnitDispDelta_2 = ""
+  PB_CP_AvgDispDelay_2 = ""
+  PB_CP_MajorTimeSliceDelta_2 = ""
+  PB_CP_MinorTimeSliceDelta_2 = ""
+  PB_CP_SD_MaxDispDelay_2 = ""
+  PB_CP_SD_TotDispDelayDelta_2 = ""
+  PB_CP_SD_WorkUnitDispDelta_2 = ""
+  PB_CP_SD_AvgDispDelay_2 = ""
+  PB_CP_SD_MajorTimeSliceDelta_2 = ""
+  PB_CP_SD_MinorTimeSliceDelta_2 = ""
+  PB_CP_MaxQDepth_3 = ""
+  PB_CP_QDepthDelta_3 = ""
+  PB_CP_AvgQDepthPerSample_3 = ""
+  PB_CP_AvgQDepthPerSamplePerWuq_3 = ""
+  PB_CP_MaxDispDelay_3 = ""
+  PB_CP_TotDispDelayDelta_3 = ""
+  PB_CP_WorkUnitDispDelta_3 = ""
+  PB_CP_AvgDispDelay_3 = ""
+  PB_CP_MajorTimeSliceDelta_3 = ""
+  PB_CP_MinorTimeSliceDelta_3 = ""
+  PB_CP_SD_MaxDispDelay_3 = ""
+  PB_CP_SD_TotDispDelayDelta_3 = ""
+  PB_CP_SD_WorkUnitDispDelta_3 = ""
+  PB_CP_SD_AvgDispDelay_3 = ""
+  PB_CP_SD_MajorTimeSliceDelta_3 = ""
+  PB_CP_SD_MinorTimeSliceDelta_3 = ""
+  PB_CP_MaxQDepth_4 = ""
+  PB_CP_QDepthDelta_4 = ""
+  PB_CP_AvgQDepthPerSample_4 = ""
+  PB_CP_AvgQDepthPerSamplePerWuq_4 = ""
+  PB_CP_MaxDispDelay_4 = ""
+  PB_CP_TotDispDelayDelta_4 = ""
+  PB_CP_WorkUnitDispDelta_4 = ""
+  PB_CP_AvgDispDelay_4 = ""
+  PB_CP_MajorTimeSliceDelta_4 = ""
+  PB_CP_MinorTimeSliceDelta_4 = ""
+  PB_CP_SD_MaxDispDelay_4 = ""
+  PB_CP_SD_TotDispDelayDelta_4 = ""
+  PB_CP_SD_WorkUnitDispDelta_4 = ""
+  PB_CP_SD_AvgDispDelay_4 = ""
+  PB_CP_SD_MajorTimeSliceDelta_4 = ""
+  PB_CP_SD_MinorTimeSliceDelta_4 = ""
+
+ PB_IIP_ContributingWUQs = ""
+ PB_IIP_SigDelayWUQs = ""
+ PB_IIP_MaxQDepth_1 = ""
+ PB_IIP_QDepthDelta_1 = ""
+ PB_IIP_AvgQDepthPerSample_1 = ""
+ PB_IIP_AvgQDepthPerSamplePerWuq_1 = ""
+ PB_IIP_MaxDispDelay_1 = ""
+ PB_IIP_TotDispDelayDelta_1 = ""
+ PB_IIP_WorkUnitDispDelta_1 = ""
+ PB_IIP_AvgDispDelay_1 = ""
+ PB_IIP_MajorTimeSliceDelta_1 = ""
+ PB_IIP_MinorTimeSliceDelta_1 = ""
+ PB_IIP_SD_MaxDispDelay_1 = ""
+ PB_IIP_SD_TotDispDelayDelta_1 = ""
+ PB_IIP_SD_WorkUnitDispDelta_1 = ""
+ PB_IIP_SD_AvgDispDelay_1 = ""
+ PB_IIP_SD_MajorTimeSliceDelta_1 = ""
+ PB_IIP_SD_MinorTimeSliceDelta_1 = ""
+ PB_IIP_MaxQDepth_2 = ""
+ PB_IIP_QDepthDelta_2 = ""
+ PB_IIP_AvgQDepthPerSample_2 = ""
+ PB_IIP_AvgQDepthPerSamplePerWuq_2 = ""
+ PB_IIP_MaxDispDelay_2 = ""
+ PB_IIP_TotDispDelayDelta_2 = ""
+ PB_IIP_WorkUnitDispDelta_2 = ""
+ PB_IIP_AvgDispDelay_2 = ""
+ PB_IIP_MajorTimeSliceDelta_2 = ""
+ PB_IIP_MinorTimeSliceDelta_2 = ""
+ PB_IIP_SD_MaxDispDelay_2 = ""
+ PB_IIP_SD_TotDispDelayDelta_2 = ""
+ PB_IIP_SD_WorkUnitDispDelta_2 = ""
+ PB_IIP_SD_AvgDispDelay_2 = ""
+ PB_IIP_SD_MajorTimeSliceDelta_2 = ""
+ PB_IIP_SD_MinorTimeSliceDelta_2 = ""
+ PB_IIP_MaxQDepth_3 = ""
+ PB_IIP_QDepthDelta_3 = ""
+ PB_IIP_AvgQDepthPerSample_3 = ""
+ PB_IIP_AvgQDepthPerSamplePerWuq_3 = ""
+ PB_IIP_MaxDispDelay_3 = ""
+ PB_IIP_TotDispDelayDelta_3 = ""
+ PB_IIP_WorkUnitDispDelta_3 = ""
+ PB_IIP_AvgDispDelay_3 = ""
+ PB_IIP_MajorTimeSliceDelta_3 = ""
+ PB_IIP_MinorTimeSliceDelta_3 = ""
+ PB_IIP_SD_MaxDispDelay_3 = ""
+ PB_IIP_SD_TotDispDelayDelta_3 = ""
+ PB_IIP_SD_WorkUnitDispDelta_3 = ""
+ PB_IIP_SD_AvgDispDelay_3 = ""
+ PB_IIP_SD_MajorTimeSliceDelta_3 = ""
+ PB_IIP_SD_MinorTimeSliceDelta_3 = ""
+ PB_IIP_MaxQDepth_4 = ""
+ PB_IIP_QDepthDelta_4 = ""
+ PB_IIP_AvgQDepthPerSample_4 = ""
+ PB_IIP_AvgQDepthPerSamplePerWuq_4 = ""
+ PB_IIP_MaxDispDelay_4 = ""
+ PB_IIP_TotDispDelayDelta_4 = ""
+ PB_IIP_WorkUnitDispDelta_4 = ""
+ PB_IIP_AvgDispDelay_4 = ""
+ PB_IIP_MajorTimeSliceDelta_4 = ""
+ PB_IIP_MinorTimeSliceDelta_4 = ""
+ PB_IIP_SD_MaxDispDelay_4 = ""
+ PB_IIP_SD_TotDispDelayDelta_4 = ""
+ PB_IIP_SD_WorkUnitDispDelta_4 = ""
+ PB_IIP_SD_AvgDispDelay_4 = ""
+ PB_IIP_SD_MajorTimeSliceDelta_4 = ""
+ PB_IIP_SD_MinorTimeSliceDelta_4 = ""
+
+        DO N = 1 TO PBON
+PB_ProcClass = C2D(SUBSTR(SMF.I,PBOF+1,2))
+
+IF PB_ProcClass = 0 then
+DO
+  PB_CP_ContributingWUQs = C2D(SUBSTR(SMF.I,PBOF+3,2))
+  PB_CP_SigDelayWUQs = C2D(SUBSTR(SMF.I,PBOF+5,2))
+  PB_CP_MaxQDepth_1 = C2D(SUBSTR(SMF.I,PBOF+9,4))
+  PB_CP_QDepthDelta_1 = C2D(SUBSTR(SMF.I,PBOF+25,4))
+  PB_CP_AvgQDepthPerSample_1 = C2D(SUBSTR(SMF.I,PBOF+41,4))
+  PB_CP_AvgQDepthPerSamplePerWuq_1 = C2D(SUBSTR(SMF.I,PBOF+57,4))
+  PB_CP_MaxDispDelay_1 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+73,8)))
+  PB_CP_TotDispDelayDelta_1 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+105,8)))
+  PB_CP_WorkUnitDispDelta_1 = C2D(SUBSTR(SMF.I,PBOF+137,4))
+  PB_CP_AvgDispDelay_1 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+153,8)))
+  PB_CP_MajorTimeSliceDelta_1 = C2D(SUBSTR(SMF.I,PBOF+185,4))
+  PB_CP_MinorTimeSliceDelta_1 = C2D(SUBSTR(SMF.I,PBOF+201,4))
+  PB_CP_SD_MaxDispDelay_1 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+217,8)))
+  PB_CP_SD_TotDispDelayDelta_1 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+249,8)))
+  PB_CP_SD_WorkUnitDispDelta_1 = C2D(SUBSTR(SMF.I,PBOF+281,4))
+  PB_CP_SD_AvgDispDelay_1 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+297,8)))
+  PB_CP_SD_MajorTimeSliceDelta_1 = C2D(SUBSTR(SMF.I,PBOF+329,4))
+  PB_CP_SD_MinorTimeSliceDelta_1 = C2D(SUBSTR(SMF.I,PBOF+345,4))
+  PB_CP_MaxQDepth_2 = C2D(SUBSTR(SMF.I,PBOF+13,4))
+  PB_CP_QDepthDelta_2 = C2D(SUBSTR(SMF.I,PBOF+29,4))
+  PB_CP_AvgQDepthPerSample_2 = C2D(SUBSTR(SMF.I,PBOF+45,4))
+  PB_CP_AvgQDepthPerSamplePerWuq_2 = C2D(SUBSTR(SMF.I,PBOF+61,4))
+  PB_CP_MaxDispDelay_2 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+81,8)))
+  PB_CP_TotDispDelayDelta_2 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+113,8)))
+  PB_CP_WorkUnitDispDelta_2 = C2D(SUBSTR(SMF.I,PBOF+141,4))
+  PB_CP_AvgDispDelay_2 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+161,8)))
+  PB_CP_MajorTimeSliceDelta_2 = C2D(SUBSTR(SMF.I,PBOF+189,4))
+  PB_CP_MinorTimeSliceDelta_2 = C2D(SUBSTR(SMF.I,PBOF+205,4))
+  PB_CP_SD_MaxDispDelay_2 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+225,8)))
+  PB_CP_SD_TotDispDelayDelta_2 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+257,8)))
+  PB_CP_SD_WorkUnitDispDelta_2 = C2D(SUBSTR(SMF.I,PBOF+285,4))
+  PB_CP_SD_AvgDispDelay_2 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+305,8)))
+  PB_CP_SD_MajorTimeSliceDelta_2 = C2D(SUBSTR(SMF.I,PBOF+333,4))
+  PB_CP_SD_MinorTimeSliceDelta_2 = C2D(SUBSTR(SMF.I,PBOF+349,4))
+  PB_CP_MaxQDepth_3 = C2D(SUBSTR(SMF.I,PBOF+17,4))
+  PB_CP_QDepthDelta_3 = C2D(SUBSTR(SMF.I,PBOF+33,4))
+  PB_CP_AvgQDepthPerSample_3 = C2D(SUBSTR(SMF.I,PBOF+49,4))
+  PB_CP_AvgQDepthPerSamplePerWuq_3 = C2D(SUBSTR(SMF.I,PBOF+65,4))
+  PB_CP_MaxDispDelay_3 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+89,8)))
+  PB_CP_TotDispDelayDelta_3 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+121,8)))
+  PB_CP_WorkUnitDispDelta_3 = C2D(SUBSTR(SMF.I,PBOF+145,4))
+  PB_CP_AvgDispDelay_3 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+169,8)))
+  PB_CP_MajorTimeSliceDelta_3 = C2D(SUBSTR(SMF.I,PBOF+193,4))
+  PB_CP_MinorTimeSliceDelta_3 = C2D(SUBSTR(SMF.I,PBOF+209,4))
+  PB_CP_SD_MaxDispDelay_3 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+233,8)))
+  PB_CP_SD_TotDispDelayDelta_3 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+265,8)))
+  PB_CP_SD_WorkUnitDispDelta_3 = C2D(SUBSTR(SMF.I,PBOF+289,4))
+  PB_CP_SD_AvgDispDelay_3 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+313,8)))
+  PB_CP_SD_MajorTimeSliceDelta_3 = C2D(SUBSTR(SMF.I,PBOF+337,4))
+  PB_CP_SD_MinorTimeSliceDelta_3 = C2D(SUBSTR(SMF.I,PBOF+353,4))
+  PB_CP_MaxQDepth_4 = C2D(SUBSTR(SMF.I,PBOF+21,4))
+  PB_CP_QDepthDelta_4 = C2D(SUBSTR(SMF.I,PBOF+37,4))
+  PB_CP_AvgQDepthPerSample_4 = C2D(SUBSTR(SMF.I,PBOF+53,4))
+  PB_CP_AvgQDepthPerSamplePerWuq_4 = C2D(SUBSTR(SMF.I,PBOF+69,4))
+  PB_CP_MaxDispDelay_4 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+97,8)))
+  PB_CP_TotDispDelayDelta_4 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+129,8)))
+  PB_CP_WorkUnitDispDelta_4 = C2D(SUBSTR(SMF.I,PBOF+149,4))
+  PB_CP_AvgDispDelay_4 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+177,8)))
+  PB_CP_MajorTimeSliceDelta_4 = C2D(SUBSTR(SMF.I,PBOF+197,4))
+  PB_CP_MinorTimeSliceDelta_4 = C2D(SUBSTR(SMF.I,PBOF+213,4))
+  PB_CP_SD_MaxDispDelay_4 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+241,8)))
+  PB_CP_SD_TotDispDelayDelta_4 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+273,8)))
+  PB_CP_SD_WorkUnitDispDelta_4 = C2D(SUBSTR(SMF.I,PBOF+293,4))
+  PB_CP_SD_AvgDispDelay_4 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+321,8)))
+  PB_CP_SD_MajorTimeSliceDelta_4 = C2D(SUBSTR(SMF.I,PBOF+341,4))
+  PB_CP_SD_MinorTimeSliceDelta_4 = C2D(SUBSTR(SMF.I,PBOF+357,4))
+END
+
+IF PB_ProcClass = 4 then
+DO
+
+ PB_IIP_ContributingWUQs = C2D(SUBSTR(SMF.I,PBOF+3,2))
+ PB_IIP_SigDelayWUQs = C2D(SUBSTR(SMF.I,PBOF+5,2))
+ PB_IIP_MaxQDepth_1 = C2D(SUBSTR(SMF.I,PBOF+9,4))
+ PB_IIP_QDepthDelta_1 = C2D(SUBSTR(SMF.I,PBOF+25,4))
+ PB_IIP_AvgQDepthPerSample_1 = C2D(SUBSTR(SMF.I,PBOF+41,4))
+ PB_IIP_AvgQDepthPerSamplePerWuq_1 = C2D(SUBSTR(SMF.I,PBOF+57,4))
+ PB_IIP_MaxDispDelay_1 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+73,8)))
+ PB_IIP_TotDispDelayDelta_1 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+105,8)))
+ PB_IIP_WorkUnitDispDelta_1 = C2D(SUBSTR(SMF.I,PBOF+137,4))
+ PB_IIP_AvgDispDelay_1 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+153,8)))
+ PB_IIP_MajorTimeSliceDelta_1 = C2D(SUBSTR(SMF.I,PBOF+185,4))
+ PB_IIP_MinorTimeSliceDelta_1 = C2D(SUBSTR(SMF.I,PBOF+201,4))
+ PB_IIP_SD_MaxDispDelay_1 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+217,8)))
+ PB_IIP_SD_TotDispDelayDelta_1 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+249,8)))
+ PB_IIP_SD_WorkUnitDispDelta_1 = C2D(SUBSTR(SMF.I,PBOF+281,4))
+ PB_IIP_SD_AvgDispDelay_1 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+297,8)))
+ PB_IIP_SD_MajorTimeSliceDelta_1 = C2D(SUBSTR(SMF.I,PBOF+329,4))
+ PB_IIP_SD_MinorTimeSliceDelta_1 = C2D(SUBSTR(SMF.I,PBOF+345,4))
+ PB_IIP_MaxQDepth_2 = C2D(SUBSTR(SMF.I,PBOF+13,4))
+ PB_IIP_QDepthDelta_2 = C2D(SUBSTR(SMF.I,PBOF+29,4))
+ PB_IIP_AvgQDepthPerSample_2 = C2D(SUBSTR(SMF.I,PBOF+45,4))
+ PB_IIP_AvgQDepthPerSamplePerWuq_2 = C2D(SUBSTR(SMF.I,PBOF+61,4))
+ PB_IIP_MaxDispDelay_2 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+81,8)))
+ PB_IIP_TotDispDelayDelta_2 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+113,8)))
+ PB_IIP_WorkUnitDispDelta_2 = C2D(SUBSTR(SMF.I,PBOF+141,4))
+ PB_IIP_AvgDispDelay_2 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+161,8)))
+ PB_IIP_MajorTimeSliceDelta_2 = C2D(SUBSTR(SMF.I,PBOF+189,4))
+ PB_IIP_MinorTimeSliceDelta_2 = C2D(SUBSTR(SMF.I,PBOF+205,4))
+ PB_IIP_SD_MaxDispDelay_2 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+225,8)))
+ PB_IIP_SD_TotDispDelayDelta_2 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+257,8)))
+ PB_IIP_SD_WorkUnitDispDelta_2 = C2D(SUBSTR(SMF.I,PBOF+285,4))
+ PB_IIP_SD_AvgDispDelay_2 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+305,8)))
+ PB_IIP_SD_MajorTimeSliceDelta_2 = C2D(SUBSTR(SMF.I,PBOF+333,4))
+ PB_IIP_SD_MinorTimeSliceDelta_2 = C2D(SUBSTR(SMF.I,PBOF+349,4))
+ PB_IIP_MaxQDepth_3 = C2D(SUBSTR(SMF.I,PBOF+17,4))
+ PB_IIP_QDepthDelta_3 = C2D(SUBSTR(SMF.I,PBOF+33,4))
+ PB_IIP_AvgQDepthPerSample_3 = C2D(SUBSTR(SMF.I,PBOF+49,4))
+ PB_IIP_AvgQDepthPerSamplePerWuq_3 = C2D(SUBSTR(SMF.I,PBOF+65,4))
+ PB_IIP_MaxDispDelay_3 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+89,8)))
+ PB_IIP_TotDispDelayDelta_3 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+121,8)))
+ PB_IIP_WorkUnitDispDelta_3 = C2D(SUBSTR(SMF.I,PBOF+145,4))
+ PB_IIP_AvgDispDelay_3 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+169,8)))
+ PB_IIP_MajorTimeSliceDelta_3 = C2D(SUBSTR(SMF.I,PBOF+193,4))
+ PB_IIP_MinorTimeSliceDelta_3 = C2D(SUBSTR(SMF.I,PBOF+209,4))
+ PB_IIP_SD_MaxDispDelay_3 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+233,8)))
+ PB_IIP_SD_TotDispDelayDelta_3 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+265,8)))
+ PB_IIP_SD_WorkUnitDispDelta_3 = C2D(SUBSTR(SMF.I,PBOF+289,4))
+ PB_IIP_SD_AvgDispDelay_3 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+313,8)))
+ PB_IIP_SD_MajorTimeSliceDelta_3 = C2D(SUBSTR(SMF.I,PBOF+337,4))
+ PB_IIP_SD_MinorTimeSliceDelta_3 = C2D(SUBSTR(SMF.I,PBOF+353,4))
+ PB_IIP_MaxQDepth_4 = C2D(SUBSTR(SMF.I,PBOF+21,4))
+ PB_IIP_QDepthDelta_4 = C2D(SUBSTR(SMF.I,PBOF+37,4))
+ PB_IIP_AvgQDepthPerSample_4 = C2D(SUBSTR(SMF.I,PBOF+53,4))
+ PB_IIP_AvgQDepthPerSamplePerWuq_4 = C2D(SUBSTR(SMF.I,PBOF+69,4))
+ PB_IIP_MaxDispDelay_4 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+97,8)))
+ PB_IIP_TotDispDelayDelta_4 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+129,8)))
+ PB_IIP_WorkUnitDispDelta_4 = C2D(SUBSTR(SMF.I,PBOF+149,4))
+ PB_IIP_AvgDispDelay_4 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+177,8)))
+ PB_IIP_MajorTimeSliceDelta_4 = C2D(SUBSTR(SMF.I,PBOF+197,4))
+ PB_IIP_MinorTimeSliceDelta_4 = C2D(SUBSTR(SMF.I,PBOF+213,4))
+ PB_IIP_SD_MaxDispDelay_4 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+241,8)))
+ PB_IIP_SD_TotDispDelayDelta_4 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+273,8)))
+ PB_IIP_SD_WorkUnitDispDelta_4 = C2D(SUBSTR(SMF.I,PBOF+293,4))
+ PB_IIP_SD_AvgDispDelay_4 = TodUsec(C2D(SUBSTR(SMF.I,PBOF+321,8)))
+ PB_IIP_SD_MajorTimeSliceDelta_4 = C2D(SUBSTR(SMF.I,PBOF+341,4))
+ PB_IIP_SD_MinorTimeSliceDelta_4 = C2D(SUBSTR(SMF.I,PBOF+357,4))
+END
+          PBOF = PBOF + PBLN
+        END
+
+AVG_CPUBUSY_VH_CP = ENV_Num_VH_cores_CP *,
+                  ((ENV_SvtCoreMode_CP * UT_AVG_CPUBUSY_VH_CP)/100)
+
+AVG_CPUBUSY_VM_CP = ENV_Num_VM_cores_CP *,
+                  ((ENV_SvtCoreMode_CP * UT_AVG_CPUBUSY_VM_CP)/100)
+
+AVG_CPUBUSY_VL_CP = (ENV_Num_VL_Unparked_cores_CP +,
+                     ENV_Num_VL_Parked_cores_CP) *,
+                  ((ENV_SvtCoreMode_CP * UT_AVG_CPUBUSY_VL_CP)/100)
+
+AVG_CPUBUSY_CP   = AVG_CPUBUSY_VH_CP   +,
+                   AVG_CPUBUSY_VM_CP   +,
+                   AVG_CPUBUSY_VL_CP
+
+AVG_CPUBUSY_VH_ZIIP = ENV_Num_VH_cores_zIIP *,
+                  ((ENV_SvtCoreMode_zIIP * UT_AVG_CPUBUSY_VH_ZIIP)/100)
+
+AVG_CPUBUSY_VM_ZIIP = ENV_Num_VM_cores_zIIP *,
+                  ((ENV_SvtCoreMode_zIIP * UT_AVG_CPUBUSY_VM_ZIIP)/100)
+
+AVG_CPUBUSY_VL_ZIIP = (ENV_Num_VL_Unparked_cores_zIIP +,
+                     ENV_Num_VL_Parked_cores_zIIP) *,
+                  ((ENV_SvtCoreMode_zIIP * UT_AVG_CPUBUSY_VL_ZIIP)/100)
+
+AVG_CPUBUSY_ZIIP = AVG_CPUBUSY_VH_ZIIP +,
+                   AVG_CPUBUSY_VM_ZIIP +,
+                   AVG_CPUBUSY_VL_ZIIP
+
+AVG_COREBUSY_VH_CP = ENV_Num_VH_cores_CP *,
+                  ((UT_AVG_COREBUSY_VH_CP)/100)
+
+AVG_COREBUSY_VM_CP = ENV_Num_VM_cores_CP *,
+                  ((UT_AVG_COREBUSY_VM_CP)/100)
+
+AVG_COREBUSY_VL_CP = (ENV_Num_VL_Unparked_cores_CP +,
+                     ENV_Num_VL_Parked_cores_CP) *,
+                  ((UT_AVG_COREBUSY_VL_CP)/100)
+
+AVG_COREBUSY_CP   = AVG_COREBUSY_VH_CP   +,
+                    AVG_COREBUSY_VM_CP   +,
+                    AVG_COREBUSY_VL_CP
+
+AVG_COREBUSY_VH_ZIIP = ENV_Num_VH_cores_zIIP *,
+                  ((UT_AVG_COREBUSY_VH_ZIIP)/100)
+
+AVG_COREBUSY_VM_ZIIP = ENV_Num_VM_cores_zIIP *,
+                  ((UT_AVG_COREBUSY_VM_ZIIP)/100)
+
+AVG_COREBUSY_VL_ZIIP = (ENV_Num_VL_Unparked_cores_zIIP +,
+                     ENV_Num_VL_Parked_cores_zIIP) *,
+                  ((UT_AVG_COREBUSY_VL_ZIIP)/100)
+
+AVG_COREBUSY_ZIIP = AVG_COREBUSY_VH_ZIIP +,
+                    AVG_COREBUSY_VM_ZIIP +,
+                    AVG_COREBUSY_VL_ZIIP
+
+ if RecKey <> prevRecKey then
+ do
+   QUEUE SMF98DTE !!';'!!,
+         SMF98TME !!';'!!,
+         SMF98SID !!';'!!,
+         'GCP'    !!';'!!,
+         ENV_SvtCoreMode_CP !!';'!!,
+         ENV_AWMT_CP !!';'!!,
+         ENV_SVTMAXQL !!';'!!,
+         ENV_SVTMINHL !!';'!!,
+         ENV_OnlineCores_CPs !!';'!!,
+         ENV_Num_VH_cores_CP !!';'!!,
+         ENV_Num_VM_cores_CP !!';'!!,
+         ENV_Num_VL_Unparked_cores_CP !!';'!!,
+         ENV_Num_VL_Parked_cores_CP !!';'!!,
+         ENV_Num_Excluded_CP !!';'!!,
+         ENV_SVT_CPEngineSpeed !!';'!!,
+         ENV_SVT_Priority_Ranges_Area_High !!';'!!,
+         ENV_SVT_Priority_Ranges_Area_Med  !!';'!!,
+         ENV_SVT_Priority_Ranges_Area_Low  !!';'!!,
+         ENV_SVT_Priority_Ranges_Area_Disc !!';'!!,
+         ENV_VcmCPsPerNode !!';'!!,
+         ENV_QDepthAnalysisDelta !!';'!!,
+         ENV_Num_Core_Excluded_CP !!';'!!,
+         ENV_SVT_SubBucket_Ranges_1 !!';'!!,
+         ENV_SVT_SubBucket_Ranges_2 !!';'!!,
+         ENV_SVT_SubBucket_Ranges_3 !!';'!!,
+         ENV_SVT_SubBucket_Ranges_4 !!';'!!,
+         UT_CPUS_UNPARKED_CP !!';'!!,
+         UT_AVG_NUM_UNPARKEDVLS_CP !!';'!!,
+         UT_AVG_CPUBUSY_CP !!';'!!,
+         UT_AVG_CPUBUSY_VH_CP !!';'!!,
+         UT_AVG_CPUBUSY_VM_CP !!';'!!,
+         UT_AVG_CPUBUSY_VL_CP !!';'!!,
+         UT_AVG_COREBUSY_CP !!';'!!,
+         UT_AVG_COREBUSY_VH_CP !!';'!!,
+         UT_AVG_COREBUSY_VM_CP !!';'!!,
+         UT_AVG_COREBUSY_VL_CP !!';'!!,
+         UT_AVG_MTTW_CP_TIMETOD !!';'!!,
+         UT_AVG_TASKSPERWAKEUP_CP !!';'!!,
+         UT_AVG_SRBSPERWAKEUP_CP !!';'!!,
+         UT_AVG_HELPSPERWAKEUP_CP !!';'!!,
+         UT_SIG_NUMCPUS_CP !!';'!!,
+         UT_SIG_AVG_MTTW_CP_TIMETOD !!';'!!,
+         UT_SIG_AVG_TASKSPERWAKEUP_CP !!';'!!,
+         UT_SIG_AVG_SRBSPERWAKEUP_CP !!';'!!,
+         UT_SIG_AVG_HELPSPERWAKEUP_CP !!';'!!,
+         UT_SIG_AVG_CPUBUSY_CP !!';'!!,
+         UT_SIG_AVG_FDISPSPERWAKEUP_CP !!';'!!,
+         UT_SIG_TOP_CPU_CP !!';'!!,
+         UT_SIG_2ND_CPU_CP !!';'!!,
+         UT_SIG_TOP2_MTTW_CP_TIMETOD !!';'!!,
+         UT_AVG_FDISPSPERWAKEUP_CP !!';'!!,
+         PB_CP_ContributingWUQs !!';'!!,
+         PB_CP_SigDelayWUQs !!';'!!,
+         PB_CP_MaxQDepth_1 !!';'!!,
+         PB_CP_QDepthDelta_1 !!';'!!,
+         PB_CP_AvgQDepthPerSample_1 !!';'!!,
+         PB_CP_AvgQDepthPerSamplePerWuq_1 !!';'!!,
+         PB_CP_MaxDispDelay_1 !!';'!!,
+         PB_CP_TotDispDelayDelta_1 !!';'!!,
+         PB_CP_WorkUnitDispDelta_1 !!';'!!,
+         PB_CP_AvgDispDelay_1 !!';'!!,
+         PB_CP_MajorTimeSliceDelta_1 !!';'!!,
+         PB_CP_MinorTimeSliceDelta_1 !!';'!!,
+         PB_CP_SD_MaxDispDelay_1 !!';'!!,
+         PB_CP_SD_TotDispDelayDelta_1 !!';'!!,
+         PB_CP_SD_WorkUnitDispDelta_1 !!';'!!,
+         PB_CP_SD_AvgDispDelay_1 !!';'!!,
+         PB_CP_SD_MajorTimeSliceDelta_1 !!';'!!,
+         PB_CP_SD_MinorTimeSliceDelta_1 !!';'!!,
+         PB_CP_MaxQDepth_2 !!';'!!,
+         PB_CP_QDepthDelta_2 !!';'!!,
+         PB_CP_AvgQDepthPerSample_2 !!';'!!,
+         PB_CP_AvgQDepthPerSamplePerWuq_2 !!';'!!,
+         PB_CP_MaxDispDelay_2 !!';'!!,
+         PB_CP_TotDispDelayDelta_2 !!';'!!,
+         PB_CP_WorkUnitDispDelta_2 !!';'!!,
+         PB_CP_AvgDispDelay_2 !!';'!!,
+         PB_CP_MajorTimeSliceDelta_2 !!';'!!,
+         PB_CP_MinorTimeSliceDelta_2 !!';'!!,
+         PB_CP_SD_MaxDispDelay_2 !!';'!!,
+         PB_CP_SD_TotDispDelayDelta_2 !!';'!!,
+         PB_CP_SD_WorkUnitDispDelta_2 !!';'!!,
+         PB_CP_SD_AvgDispDelay_2 !!';'!!,
+         PB_CP_SD_MajorTimeSliceDelta_2 !!';'!!,
+         PB_CP_SD_MinorTimeSliceDelta_2 !!';'!!,
+         PB_CP_MaxQDepth_3 !!';'!!,
+         PB_CP_QDepthDelta_3 !!';'!!,
+         PB_CP_AvgQDepthPerSample_3 !!';'!!,
+         PB_CP_AvgQDepthPerSamplePerWuq_3 !!';'!!,
+         PB_CP_MaxDispDelay_3 !!';'!!,
+         PB_CP_TotDispDelayDelta_3 !!';'!!,
+         PB_CP_WorkUnitDispDelta_3 !!';'!!,
+         PB_CP_AvgDispDelay_3 !!';'!!,
+         PB_CP_MajorTimeSliceDelta_3 !!';'!!,
+         PB_CP_MinorTimeSliceDelta_3 !!';'!!,
+         PB_CP_SD_MaxDispDelay_3 !!';'!!,
+         PB_CP_SD_TotDispDelayDelta_3 !!';'!!,
+         PB_CP_SD_WorkUnitDispDelta_3 !!';'!!,
+         PB_CP_SD_AvgDispDelay_3 !!';'!!,
+         PB_CP_SD_MajorTimeSliceDelta_3 !!';'!!,
+         PB_CP_SD_MinorTimeSliceDelta_3 !!';'!!,
+         PB_CP_MaxQDepth_4 !!';'!!,
+         PB_CP_QDepthDelta_4 !!';'!!,
+         PB_CP_AvgQDepthPerSample_4 !!';'!!,
+         PB_CP_AvgQDepthPerSamplePerWuq_4 !!';'!!,
+         PB_CP_MaxDispDelay_4 !!';'!!,
+         PB_CP_TotDispDelayDelta_4 !!';'!!,
+         PB_CP_WorkUnitDispDelta_4 !!';'!!,
+         PB_CP_AvgDispDelay_4 !!';'!!,
+         PB_CP_MajorTimeSliceDelta_4 !!';'!!,
+         PB_CP_MinorTimeSliceDelta_4 !!';'!!,
+         PB_CP_SD_MaxDispDelay_4 !!';'!!,
+         PB_CP_SD_TotDispDelayDelta_4 !!';'!!,
+         PB_CP_SD_WorkUnitDispDelta_4 !!';'!!,
+         PB_CP_SD_AvgDispDelay_4 !!';'!!,
+         PB_CP_SD_MajorTimeSliceDelta_4 !!';'!!,
+         PB_CP_SD_MinorTimeSliceDelta_4 !!';'!!,
+         TRANSLATE(AVG_CPUBUSY_CP,',','.') !!';'!!,
+         TRANSLATE(AVG_CPUBUSY_VH_CP,',','.') !!';'!!,
+         TRANSLATE(AVG_CPUBUSY_VM_CP,',','.') !!';'!!,
+         TRANSLATE(AVG_CPUBUSY_VL_CP,',','.') !!';'!!,
+         TRANSLATE(AVG_COREBUSY_CP,',','.') !!';'!!,
+         TRANSLATE(AVG_COREBUSY_VH_CP,',','.') !!';'!!,
+         TRANSLATE(AVG_COREBUSY_VM_CP,',','.') !!';'!!,
+         TRANSLATE(AVG_COREBUSY_VL_CP,',','.')
+
+   if ENV_OnlineCores_zIIPs > 0 then
+   QUEUE SMF98DTE !!';'!!,
+         SMF98TME !!';'!!,
+         SMF98SID !!';'!!,
+         'IIP'    !!';'!!,
+         ENV_SvtCoreMode_zIIP !!';'!!,
+         ENV_AWMT_ZIIP !!';'!!,
+         ENV_SVT_zIIPMAXQL !!';'!!,
+         ENV_SVT_zIIPMINHL !!';'!!,
+         ENV_OnlineCores_zIIPs !!';'!!,
+         ENV_Num_VH_cores_zIIP !!';'!!,
+         ENV_Num_VM_cores_zIIP !!';'!!,
+         ENV_Num_VL_Unparked_cores_zIIP !!';'!!,
+         ENV_Num_VL_Parked_cores_zIIP !!';'!!,
+         ENV_Num_Excluded_zIIP !!';'!!,
+         ENV_SVT_SpecialtyEngineSpeed !!';'!!,
+         ENV_SVT_Priority_Ranges_Area_High !!';'!!,
+         ENV_SVT_Priority_Ranges_Area_Med  !!';'!!,
+         ENV_SVT_Priority_Ranges_Area_Low  !!';'!!,
+         ENV_SVT_Priority_Ranges_Area_Disc !!';'!!,
+         ENV_VcmCPsPerNode !!';'!!,
+         ENV_QDepthAnalysisDelta !!';'!!,
+         ENV_Num_Core_Excluded_zIIP !!';'!!,
+         ENV_SVT_SubBucket_Ranges_1 !!';'!!,
+         ENV_SVT_SubBucket_Ranges_2 !!';'!!,
+         ENV_SVT_SubBucket_Ranges_3 !!';'!!,
+         ENV_SVT_SubBucket_Ranges_4 !!';'!!,
+         UT_CPUS_UNPARKED_ZIIP !!';'!!,
+         UT_AVG_NUM_UNPARKEDVLS_ZIIP !!';'!!,
+         UT_AVG_CPUBUSY_ZIIP !!';'!!,
+         UT_AVG_CPUBUSY_VH_ZIIP !!';'!!,
+         UT_AVG_CPUBUSY_VM_ZIIP !!';'!!,
+         UT_AVG_CPUBUSY_VL_ZIIP !!';'!!,
+         UT_AVG_COREBUSY_ZIIP !!';'!!,
+         UT_AVG_COREBUSY_VH_ZIIP !!';'!!,
+         UT_AVG_COREBUSY_VM_ZIIP !!';'!!,
+         UT_AVG_COREBUSY_VL_ZIIP !!';'!!,
+         UT_AVG_MTTW_ZIIP_TIMETOD !!';'!!,
+         UT_AVG_TASKSPERWAKEUP_ZIIP !!';'!!,
+         UT_AVG_SRBSPERWAKEUP_ZIIP !!';'!!,
+         UT_AVG_HELPSPERWAKEUP_ZIIP !!';'!!,
+         UT_SIG_NUMCPUS_ZIIP !!';'!!,
+         UT_SIG_AVG_MTTW_ZIIP_TIMETOD !!';'!!,
+         UT_SIG_AVG_TASKSPERWAKEUP_ZIIP !!';'!!,
+         UT_SIG_AVG_SRBSPERWAKEUP_ZIIP !!';'!!,
+         UT_SIG_AVG_HELPSPERWAKEUP_ZIIP !!';'!!,
+         UT_SIG_AVG_CPUBUSY_ZIIP !!';'!!,
+         UT_SIG_AVG_FDISPSPERWAKEUP_ZIIP !!';'!!,
+         UT_SIG_TOP_CPU_ZIIP !!';'!!,
+         UT_SIG_2ND_CPU_ZIIP !!';'!!,
+         UT_SIG_TOP2_MTTW_ZIIP_TIMETOD !!';'!!,
+         UT_AVG_FDISPSPERWAKEUP_ZIIP !!';'!!,
+         PB_IIP_ContributingWUQs !!';'!!,
+         PB_IIP_SigDelayWUQs !!';'!!,
+         PB_IIP_MaxQDepth_1 !!';'!!,
+         PB_IIP_QDepthDelta_1 !!';'!!,
+         PB_IIP_AvgQDepthPerSample_1 !!';'!!,
+         PB_IIP_AvgQDepthPerSamplePerWuq_1 !!';'!!,
+         PB_IIP_MaxDispDelay_1 !!';'!!,
+         PB_IIP_TotDispDelayDelta_1 !!';'!!,
+         PB_IIP_WorkUnitDispDelta_1 !!';'!!,
+         PB_IIP_AvgDispDelay_1 !!';'!!,
+         PB_IIP_MajorTimeSliceDelta_1 !!';'!!,
+         PB_IIP_MinorTimeSliceDelta_1 !!';'!!,
+         PB_IIP_SD_MaxDispDelay_1 !!';'!!,
+         PB_IIP_SD_TotDispDelayDelta_1 !!';'!!,
+         PB_IIP_SD_WorkUnitDispDelta_1 !!';'!!,
+         PB_IIP_SD_AvgDispDelay_1 !!';'!!,
+         PB_IIP_SD_MajorTimeSliceDelta_1 !!';'!!,
+         PB_IIP_SD_MinorTimeSliceDelta_1 !!';'!!,
+         PB_IIP_MaxQDepth_2 !!';'!!,
+         PB_IIP_QDepthDelta_2 !!';'!!,
+         PB_IIP_AvgQDepthPerSample_2 !!';'!!,
+         PB_IIP_AvgQDepthPerSamplePerWuq_2 !!';'!!,
+         PB_IIP_MaxDispDelay_2 !!';'!!,
+         PB_IIP_TotDispDelayDelta_2 !!';'!!,
+         PB_IIP_WorkUnitDispDelta_2 !!';'!!,
+         PB_IIP_AvgDispDelay_2 !!';'!!,
+         PB_IIP_MajorTimeSliceDelta_2 !!';'!!,
+         PB_IIP_MinorTimeSliceDelta_2 !!';'!!,
+         PB_IIP_SD_MaxDispDelay_2 !!';'!!,
+         PB_IIP_SD_TotDispDelayDelta_2 !!';'!!,
+         PB_IIP_SD_WorkUnitDispDelta_2 !!';'!!,
+         PB_IIP_SD_AvgDispDelay_2 !!';'!!,
+         PB_IIP_SD_MajorTimeSliceDelta_2 !!';'!!,
+         PB_IIP_SD_MinorTimeSliceDelta_2 !!';'!!,
+         PB_IIP_MaxQDepth_3 !!';'!!,
+         PB_IIP_QDepthDelta_3 !!';'!!,
+         PB_IIP_AvgQDepthPerSample_3 !!';'!!,
+         PB_IIP_AvgQDepthPerSamplePerWuq_3 !!';'!!,
+         PB_IIP_MaxDispDelay_3 !!';'!!,
+         PB_IIP_TotDispDelayDelta_3 !!';'!!,
+         PB_IIP_WorkUnitDispDelta_3 !!';'!!,
+         PB_IIP_AvgDispDelay_3 !!';'!!,
+         PB_IIP_MajorTimeSliceDelta_3 !!';'!!,
+         PB_IIP_MinorTimeSliceDelta_3 !!';'!!,
+         PB_IIP_SD_MaxDispDelay_3 !!';'!!,
+         PB_IIP_SD_TotDispDelayDelta_3 !!';'!!,
+         PB_IIP_SD_WorkUnitDispDelta_3 !!';'!!,
+         PB_IIP_SD_AvgDispDelay_3 !!';'!!,
+         PB_IIP_SD_MajorTimeSliceDelta_3 !!';'!!,
+         PB_IIP_SD_MinorTimeSliceDelta_3 !!';'!!,
+         PB_IIP_MaxQDepth_4 !!';'!!,
+         PB_IIP_QDepthDelta_4 !!';'!!,
+         PB_IIP_AvgQDepthPerSample_4 !!';'!!,
+         PB_IIP_AvgQDepthPerSamplePerWuq_4 !!';'!!,
+         PB_IIP_MaxDispDelay_4 !!';'!!,
+         PB_IIP_TotDispDelayDelta_4 !!';'!!,
+         PB_IIP_WorkUnitDispDelta_4 !!';'!!,
+         PB_IIP_AvgDispDelay_4 !!';'!!,
+         PB_IIP_MajorTimeSliceDelta_4 !!';'!!,
+         PB_IIP_MinorTimeSliceDelta_4 !!';'!!,
+         PB_IIP_SD_MaxDispDelay_4 !!';'!!,
+         PB_IIP_SD_TotDispDelayDelta_4 !!';'!!,
+         PB_IIP_SD_WorkUnitDispDelta_4 !!';'!!,
+         PB_IIP_SD_AvgDispDelay_4 !!';'!!,
+         PB_IIP_SD_MajorTimeSliceDelta_4 !!';'!!,
+         PB_IIP_SD_MinorTimeSliceDelta_4 !!';'!!,
+         TRANSLATE(AVG_CPUBUSY_ZIIP,',','.') !!';'!!,
+         TRANSLATE(AVG_CPUBUSY_VH_ZIIP,',','.') !!';'!!,
+         TRANSLATE(AVG_CPUBUSY_VM_ZIIP,',','.') !!';'!!,
+         TRANSLATE(AVG_CPUBUSY_VL_ZIIP,',','.') !!';'!!,
+         TRANSLATE(AVG_COREBUSY_ZIIP,',','.') !!';'!!,
+         TRANSLATE(AVG_COREBUSY_VH_ZIIP,',','.') !!';'!!,
+         TRANSLATE(AVG_COREBUSY_VM_ZIIP,',','.') !!';'!!,
+         TRANSLATE(AVG_COREBUSY_VL_ZIIP,',','.')
+ end
+        prevRecKey = RecKey
+
+        SMF98DOF = SMF98DOF+SMF98DLN
+      END
+    END
+  END
+
+  COUNT=COUNT + QUEUED();
+  "EXECIO" QUEUED() "DISKW OUT"
+  "EXECIO 100 DISKR SMF (STEM SMF.)"
+  SAY "COUNT: "COUNT". TIME IS: "TIME() ;
+END
+
+"EXECIO 0 DISKR SMF (STEM SMF. FINIS)"
+"EXECIO 0 DISKW OUT (FINIS)"
+
+EXIT
+
+/* ------------------------------------------------------------ */
+SMFDATE: PROCEDURE
+  ARG DATE0
+  DATE1 = SUBSTR(C2X(DATE0),3,5)
+  RETURN DATE('E',DATE1,'J')
+
+/* ------------------------------------------------------------ */
+SMFTIME:
+  ARG TIME0
+  TIME1 = TIME0 % 100
+  HH = TIME1 % 3600
+  HH = RIGHT("0"!!HH,2)
+  MM = (TIME1 % 60) - (HH * 60)
+  MM = RIGHT("0"!!MM,2)
+  SS = TIME1 - (HH * 3600) - (MM * 60)
+  SS = RIGHT("0"!!SS,2)
+  OTIME = HH!!":"!!MM!!":"!!SS
+RETURN OTIME
+/*---------------------------------------------------------------------
+ Function: TodDateTime
+ Returns: 27 char Human readable date/time
+ ---------------------------------------------------------------------*/
+TodDateTime: procedure
+  parse arg tod_val    /* input TOD in decimal */
+
+  tod_val = tod_val /*  + CvtLDTO - CVTLSO */
+  useconds = tod_val % 4096
+  seconds = useconds % 1000000
+  days = seconds % 86400
+  seconds = seconds // 86400
+  useconds = right(useconds // 1000000,6,0)
+  day = date('N',days+693595,'B')
+  hours = right(seconds % 3600,2,0)
+  minutes = right((seconds - hours * 3600) % 60,2,0)
+  seconds = right(seconds // 60,2,0)
+  htime = day hours':'minutes':'seconds'.'useconds
+  return (htime)
+
+/*---------------------------------------------------------------------
+ Function: TodTime
+ Returns: 16 char Human readable time
+ ---------------------------------------------------------------------*/
+TodTime: procedure
+  parse arg tod_val    /* input TOD in decimal */
+
+  tod_val = tod_val /*  + CvtLDTO - CVTLSO */
+  useconds = tod_val % 4096
+  seconds = useconds % 1000000
+  days = seconds % 86400
+  seconds = seconds // 86400
+  useconds = right(useconds // 1000000,6,0)
+  day = date('N',days+693595,'B')
+  hours = right(seconds % 3600,2,0)
+  minutes = right((seconds - hours * 3600) % 60,2,0)
+  seconds = right(seconds // 60,2,0)
+  htime = hours':'minutes':'seconds'.'useconds
+  return (htime)
+
+/*---------------------------------------------------------------------
+ Function: TodUsec
+ Returns: 16 char Human readable time in usec
+ ---------------------------------------------------------------------*/
+TodUsec: procedure
+  parse arg tod_val    /* input TOD in decimal */
+
+  tod_val = tod_val /*  + CvtLDTO - CVTLSO */
+  useconds = tod_val % 4096
+  return (useconds)
+
+/* ------------------------------------------------------------ */
+UNPACK: PROCEDURE
+  PARSE ARG PACKED_STR, NUM_DEC
+  IF NUM_DEC = "" THEN
+    NUM_DEC=0
+                        /* CONVERT PACKED DATA TO HEX AND SPLIT INTO  */
+                        /* NUMBER AND SIGN PORTIONS                   */
+  HEX_STR=C2X( PACKED_STR )
+  DEC_STR=LEFT( HEX_STR, LENGTH( HEX_STR )-1 )
+  PACKED_SIGN=RIGHT( HEX_STR, 1 )
+                        /* CHECK THAT SIGN AND NUMERIC PORTIONS HAVE  */
+                        /* VALID VALUES                               */
+  IF VERIFY( PACKED_SIGN, "ABCDEF" ) > 0 THEN
+    RETURN ""
+  IF VERIFY( DEC_STR, "0123456789" ) > 0 THEN
+    RETURN ""
+                        /* ARE THERE ENOUGH DIGITS FOR THE DECIMAL    */
+                        /* POINT??                                    */
+  IF NUM_DEC > LENGTH( DEC_STR ) THEN
+    RETURN ""
+                        /* IF SIGN PORTION INDICATES A NEGATIVE       */
+                        /* NUMBER THEN OBLIGE                         */
+  IF POS( PACKED_SIGN, "BD" ) > 0 THEN
+    DEC_STR=0-DEC_STR
+                        /* IF THERE IS A DECIMAL POINT THEN ADD IT AT */
+                        /* THE APPROPRIATE PLACE                      */
+  IF NUM_DEC > 0 THEN
+    DEC_STR=INSERT( ".", DEC_STR, LENGTH( DEC_STR )-NUM_DEC )
+RETURN DEC_STR
